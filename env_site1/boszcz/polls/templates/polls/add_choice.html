@@ -1,0 +1,10 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<form method="POST" action="">
+{% csrf_token %}
+<input type="text" name="new_choice" value=""><br>
+<input type="submit" value="Submit">
+</form>
+
+<a href="{% url 'polls:detail' question.id %}">Return</a>

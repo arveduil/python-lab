@@ -1,0 +1,44 @@
+
+
+
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<br>
+
+{% if error_message %}
+<p><strong>{{error_message}}</strong></p>
+{% endif %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                       {{question.question_text}}
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    {% for choice in question.choice_set.all %}
+
+                        <li class="list-group-item">
+                           {{choice.choice_text}} -- {{choice.votes}} vote{{choice.votes|pluralize}} {{sum}}
+                        </li>
+
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                 <a href="{% url 'polls:detail' question.id %}">Vote Again</a>
+                    <br>
+                 <a href="/polls/">Return to main page</a>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>-->
+<!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<br>
+
+
+{% if error_message %}
+<p><strong>{{error_message}}</strong></p>
+{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+
+{% csrf_token %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-arrow-right"></span>{{question.question_text}}
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    {% for choice in question.choice_set.all %}
+
+                        <li class="list-group-item">
+                            <input type="radio" name="choice"
+                            id="choice{{ forloop.counter }}"
+                                value="{{ choice.id }}" />
+
+                    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+                        </li>
+
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                 <input type="submit" value="Vote" />
+                    <a href="{% url 'polls:add_choice' question.id %}">Add option</a>
+
+            </div>
+        </div>
+    </div>
+</div></form>
